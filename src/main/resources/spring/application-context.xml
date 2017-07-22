@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		">
+
+    <context:component-scan base-package="com.deecent.business"/>
+
+    <bean id="testBeanOne" class="com.deecent.business.TestBeanOne"/>
+
+    <bean id="testBeanTwo" class="com.deecent.business.TestBeanTwo"/>
+
+    <bean id="testBeanThree" class="com.deecent.business.TestBeanThree"/>
+
+    <bean id="testBeanFour" class="com.deecent.business.TestBeanFour"/>
+
+    <!--getset注入-->
+    <bean id="noConstructorTestBean" class="com.deecent.business.NoConstructorTestBean">
+        <property name="testBeanOne" ref="testBeanOne"/>
+        <property name="testBeanTwo" ref="testBeanTwo"/>
+    </bean>
+
+    <!--构造器注入-->
+    <bean id="constructorTestBean" class="com.deecent.business.ConstructorTestBean">
+        <!--index type name只要能确定注入的唯一即可，并非全部都要-->
+        <constructor-arg index="0" name="testBeanThree" ref="testBeanThree"/>
+        <constructor-arg index="1" name="testString" value="luke"/>
+    </bean>
+</beans>
